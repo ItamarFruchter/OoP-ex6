@@ -5,6 +5,28 @@ package oop.ex6.variables;
  */
 public enum Modifier {
 	FINAL;
-	
-	//Hello Ohad
+
+	// The string representation of the modifier.
+	private String stringRepresentation;
+
+	// The modifier's constructor.
+	private Modifier(String stringRepresentation) {
+		this.stringRepresentation = stringRepresentation;
+	}
+
+	/**
+	 * Returns the modifier fitting for this string, null otherwise.
+	 * 
+	 * @param modifierString
+	 *            The string representation of some modifier.
+	 * @return A modifier if there is one fitting, null otherwise,
+	 */
+	public Modifier modifierFromString(String modifierString) {
+		for (Modifier modifier : Modifier.values()) {
+			if (modifier.stringRepresentation.equals(modifierString)) {
+				return modifier;
+			}
+		}
+		return null;
+	}
 }
