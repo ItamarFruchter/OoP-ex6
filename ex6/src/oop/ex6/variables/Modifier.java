@@ -22,7 +22,7 @@ public enum Modifier {
 	 *            The string representation of some modifier.
 	 * @return A modifier if there is one fitting, null otherwise,
 	 */
-	public Modifier modifierFromString(String modifierString) {
+	public static Modifier modifierFromString(String modifierString) {
 		for (Modifier modifier : Modifier.values()) {
 			if (modifier.equals(NO_MODIFIER) && modifierString == null) {
 				return NO_MODIFIER;

@@ -1,6 +1,5 @@
 package oop.ex6.variables;
 
-import java.lang.reflect.Modifier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,9 +81,11 @@ public class Member {
 	 *            This member's type.
 	 * @param valueString
 	 *            This member's value.
+	 * @throws IllegalCodeException 
+	 * @throws NonValidValueException 
 	 */
-	public Member(String nameString, String typeString, String valueString) {
-		Member(nameString, typeString, valueString, null);
+	public Member(String nameString, String typeString, String valueString) throws NonValidValueException, IllegalCodeException {
+		this(nameString, typeString, valueString, null);
 	}
 
 	/*

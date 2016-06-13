@@ -1,5 +1,9 @@
+package oop.ex6;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import oop.ex6.variables.Modifier;
 
 public class regexTests {
 	public static void main(String args[]) {
@@ -13,4 +17,4 @@ public class regexTests {
 		
 		System.out.println(Modifier.modifierFromString("final"));
 	}
-}S
+}

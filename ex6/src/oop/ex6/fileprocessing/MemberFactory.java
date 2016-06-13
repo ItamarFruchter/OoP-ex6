@@ -68,10 +68,18 @@ public class MemberFactory {
 		return null
 	}
 	
+	private static Member[] createMembersWithoutModifire(String tempString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private static Member[] createMembersWithModifire(String tempString) {
 		Matcher wordMatcher = WORD.matcher(tempString);
 		wordMatcher.find();
 		String modifier = tempString.substring(wordMatcher.start(), wordMatcher.end());
+		wordMatcher.replaceFirst(EMPTY_STRING);
+		wordMatcher.reset(tempString);
+		String type = tempString.substring(wordMatcher.start(), wordMatcher.end());
 		
 		return null;
 	}

@@ -1,11 +1,13 @@
 package oop.ex6.variables;
 
+import oop.ex6.error.IllegalCodeException;
+
 /**
  * Occurs when the value given to a parameter was not legal. It might be another
  * variable's name, so this exception holds any needed information to check
  * this. Not necessarily an illegal code exception!
  */
-public class NonValidValueException extends Exception {
+public class NonValidValueException extends IllegalCodeException {
 	
 	private static final long serialVersionUID = 1L;
 	/** The variable type to check. */
