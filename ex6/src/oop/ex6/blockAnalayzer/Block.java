@@ -2,7 +2,7 @@
 /**
  * Represents any block in S-java. 
  */
-public class Block {
+public abstract class Block {
 	/**
 	 * The known local members this block (scope wise).
 	 */
@@ -16,5 +16,13 @@ public class Block {
 	  */
 	 protected LinkedList<String> knownMethods;
 	 
-	 public Block 
+	 /**
+	  * Creates the block of
+	  * @param content The lines to parse in the block.
+	  */
+	 public Block(String content) {
+		 
+	 }
+	 
+	 private abstract boolean checkCondition(String condition);
 }
