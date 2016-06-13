@@ -71,7 +71,8 @@ public class MemberFactory {
 	private static Member[] createMembersWithModifire(String tempString) {
 		Matcher wordMatcher = WORD.matcher(tempString);
 		wordMatcher.find();
-		String modifier = 
+		String modifier = tempString.substring(wordMatcher.start(), wordMatcher.end());
+		
 		return null;
 	}
 

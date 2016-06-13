@@ -69,8 +69,6 @@ public enum Type {
 			INT_STRING = "int", DOUBLE_STRING = "double",
 			BOOLEAN_STRING = "boolean";
 
-	// The index of the value of the string/char.
-	private static final int START_INDEX = 1, END_BEFORE = 2;
 
 	// The regular expression patterns for each variable.
 	private static final String STRING_REGEX = "\\s*\".*\"\\s*",

@@ -7,4 +7,6 @@ import oop.ex6.error.IllegalCodeException;
  */
 public class IllegalNameException extends IllegalCodeException {
 
+	private static final long serialVersionUID = 1L;
+
 }
