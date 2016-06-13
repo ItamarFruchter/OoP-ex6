@@ -118,15 +118,18 @@ public class Member {
 	 * @param newValue
 	 *            The new value to try and put.
 	 */
-	public void setValue(String newValue) {
-		if(modifier.equals(Modifier.FINAL))
-	}
-
-	public Type getType() {
-		return type;
-	}
-
-	public String getName() {
-		return name;
+	public void setValue(String newValue) throws IllegalCodeException {
+		if (modifier.equals(Modifier.FINAL)) {
+			if (hasValue) {
+				throw new ChangeFinalMemberValueException();				
+			} else {
+				if (newValue != null) {
+					this.hasValue = true; 
+					if (!type.isValidValue(newValue)) {
+						throw new NonValidValueException(type, newValue.trim());
+					}
+				}
+			}
+		} 
 	}
 }
