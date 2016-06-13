@@ -3,10 +3,8 @@ package oop.ex6.fileprocessing;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import oop.ex6.error.IllegalCodeException;
 import oop.ex6.variables.Member;
-import oop.ex6.variables.NonValidValueException;
 
 
 public class MemberFactory {
@@ -38,7 +36,7 @@ public class MemberFactory {
 	
 	private MemberFactory(){}
 	
-	public static Member[] createMembers(String line) throws NonValidValueException, IllegalCodeException{
+	public static Member[] createMembers(String line) throws IllegalCodeException{
 		String tempString = new String(line);
 		clearSpaces(tempString);
 		Matcher withModifireMatcher = WITH_MODIFIER.matcher(tempString);
@@ -50,7 +48,7 @@ public class MemberFactory {
 		}
 	}	
 	
-	private static Member[] createMembersWithoutModifire(String tempString) throws NonValidValueException, IllegalCodeException {
+	private static Member[] createMembersWithoutModifire(String tempString) throws IllegalCodeException {
 		LinkedList<Member> listOfMembers = new LinkedList<Member>();
 		Matcher wordMatcher = WORD.matcher(tempString);
 		wordMatcher.find();
@@ -63,7 +61,7 @@ public class MemberFactory {
 		return listOfMembers.toArray(new Member[listOfMembers.size()]);
 	}
 
-	private static Member[] createMembersWithModifire(String tempString) throws NonValidValueException, IllegalCodeException {
+	private static Member[] createMembersWithModifire(String tempString) throws IllegalCodeException {
 		LinkedList<Member> listOfMembers = new LinkedList<Member>();
 		Matcher wordMatcher = WORD.matcher(tempString);
 		wordMatcher.find();
