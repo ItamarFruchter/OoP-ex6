@@ -15,4 +15,6 @@ public class Block {
 	  * The known local methods this block (scope wise).
 	  */
 	 protected LinkedList<String> knownMethods;
+	 
+	 public Block 
 }

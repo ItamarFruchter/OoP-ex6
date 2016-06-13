@@ -4,7 +4,8 @@ package oop.ex6.variables;
  * All the modifier types in S-java.
  */
 public enum Modifier {
-	FINAL;
+	FINAL("final"),
+	NO_MODIFIER(null);
 
 	// The string representation of the modifier.
 	private String stringRepresentation;
@@ -23,7 +24,9 @@ public enum Modifier {
 	 */
 	public Modifier modifierFromString(String modifierString) {
 		for (Modifier modifier : Modifier.values()) {
-			if (modifier.stringRepresentation.equals(modifierString)) {
+			if (modifier.equals(NO_MODIFIER) && modifierString == null) {
+				return NO_MODIFIER;
+			} else if (modifier.stringRepresentation.equals(modifierString)) {
 				return modifier;
 			}
 		}
