@@ -11,6 +11,7 @@ public class MemberFactory {
 	private static final Pattern SPACES = Pattern.compile("\\s+");
 	private static final Pattern WORD = Pattern.compile("\\w+");
 	private static final Pattern VALUE = Pattern.compile("[\\w\"\\.']+");
+	private static final Pattern WITH_MODIFIER = Pattern.compile("\\w+\\s+\\w+\\s+\\w+");
 	
 	
 	private MemberFactory(){}
@@ -21,11 +22,15 @@ public class MemberFactory {
 		String type = null;
 		String name = null;
 		String value = null;
-		Matcher spacesMatcher = SPACES.matcher(tempString);
-		if (spacesMatcher.lookingAt()){
-			spacesMatcher.replaceFirst(EMPTY_STRING);
+		clearSpaces(tempString);
+		Matcher withModifireMatcher = WITH_MODIFIER.matcher(tempString);
+		if (withModifireMatcher.lookingAt()){
+			return createMembersWithModifire(tempString);
 		}
-		Matcher wordMatcher = WORD.matcher(tempString);
+		else {
+			return createMembersWithoutModifire(tempString);
+		}
+		
 		wordMatcher.lookingAt();
 		if (tempString.substring(wordMatcher.start(), wordMatcher.end()).equals(MODIFIER)){
 			modifier = true;
@@ -62,5 +67,18 @@ public class MemberFactory {
 		}
 		return null
 	}
+	
+	private static Member[] createMembersWithModifire(String tempString) {
+		Matcher wordMatcher = WORD.matcher(tempString);
+		wordMatcher.find();
+		String modifier = 
+		return null;
+	}
+
+	private static void clearSpaces(String stringToWork){
+		Matcher spacesMatcher = SPACES.matcher(stringToWork);
+		if (spacesMatcher.lookingAt()){
+			spacesMatcher.replaceFirst(EMPTY_STRING);
+		}
 	}
 }
