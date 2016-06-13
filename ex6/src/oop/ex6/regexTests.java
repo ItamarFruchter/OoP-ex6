@@ -10,5 +10,7 @@ public class regexTests {
 		} else {
 			System.out.println("NO");
 		}
+		
+		System.out.println(Modifier.modifierFromString("final"));
 	}
-}
+}S
