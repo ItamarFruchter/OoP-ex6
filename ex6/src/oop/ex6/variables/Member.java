@@ -1,5 +1,6 @@
 package oop.ex6.variables;
 
+import java.lang.reflect.Modifier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,9 +23,12 @@ public class Member {
 
 	/** A string representation of this member's value. */
 	public boolean hasValue;
-	
+
 	/** This member's name. */
 	public final String name;
+
+	/** This member's modifier. */
+	public final Modifier modifier;
 
 	/**
 	 * Creates a member.
@@ -35,19 +39,34 @@ public class Member {
 	 *            This member's type.
 	 * @param valueString
 	 *            This member's value.
+	 * @param modifierString
+	 *            A string representation of a modifier.
 	 * @throws IllegalCodeException
 	 * @throws NonValidValueException
 	 */
-	public Member(String nameString, String typeString, String valueString)
+	public Member(String nameString, String typeString, String valueString,
+			String modifierString)
 			throws IllegalCodeException, NonValidValueException {
 		if (checkName(nameString)) {
 			this.name = nameString;
 			this.type = Type.findType(typeString); // May throw invalid type
 													// exception.
-			this.hasValue = true; // Is always initialized as true, and will be
-									// ignored if it is an illegal value.
-			if (!type.isValidValue(valueString)) {
-				throw new NonValidValueException(type, valueString.trim());
+
+			if (valueString != null) {
+				this.hasValue = true; // Is always initialized as true, and will
+										// be ignored if it is an illegal value.
+				if (!type.isValidValue(valueString)) {
+					throw new NonValidValueException(type, valueString.trim());
+				}
+			} else {
+				this.hasValue = false;
+			}
+
+			Modifier modifier = Modifier.modifierFromString(modifierString);
+			if (modifier != null) {
+				this.modifier = modifier;
+			} else {
+				throw new InvalidModifierException();
 			}
 		} else {
 			throw new IllegalNameException();
@@ -55,24 +74,17 @@ public class Member {
 	}
 
 	/**
-	 * Creates a member with no value.
+	 * Creates a member with no modifier.
 	 * 
 	 * @param nameString
 	 *            This member's name.
 	 * @param typeString
 	 *            This member's type.
-	 * @throws InvalidTypeException
-	 * @throws IllegalCodeException
+	 * @param valueString
+	 *            This member's value.
 	 */
-	public Member(String nameString, String typeString)
-			throws InvalidTypeException, IllegalCodeException {
-		if (checkName(nameString)) {
-			this.name = nameString;
-			this.type = Type.findType(typeString);
-			this.hasValue = false;
-		} else {
-			throw new IllegalNameException();
-		}
+	public Member(String nameString, String typeString, String valueString) {
+		Member(nameString, typeString, valueString, null);
 	}
 
 	/*
@@ -83,10 +95,10 @@ public class Member {
 		Matcher nameMatcher = namePattern.matcher(trimmedName);
 		return (nameMatcher.matches() && !isReservedWord(trimmedName));
 	}
-	
+
 	private boolean isReservedWord(String name) {
-		for (String reserved: RESERVED_WORDS) {
-			if(reserved.equals(name)) {
+		for (String reserved : RESERVED_WORDS) {
+			if (reserved.equals(name)) {
 				return true;
 			}
 		}
@@ -95,14 +107,19 @@ public class Member {
 
 	/**
 	 * Returns true iff this member has value.
-	 * @return
 	 */
-	public boolean isHasValue() {
+	public boolean HasValue() {
 		return hasValue;
 	}
 
-	public void setHasValue(boolean hasValue) {
-		this.hasValue = hasValue;
+	/**
+	 * Tries to set the value of a parameter.
+	 * 
+	 * @param newValue
+	 *            The new value to try and put.
+	 */
+	public void setValue(String newValue) {
+		if(modifier.equals(Modifier.FINAL))
 	}
 
 	public Type getType() {
