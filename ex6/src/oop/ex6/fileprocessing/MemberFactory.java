@@ -34,15 +34,6 @@ public class MemberFactory {
 			this.name = name;
 			this.value = value;
 		}
-		
-		public String getName(){
-			return name;
-		}
-		
-		public String getValue(){
-			return value;
-		}
-		
 	}
 	
 	private MemberFactory(){}
@@ -67,7 +58,7 @@ public class MemberFactory {
 		wordMatcher.replaceFirst(EMPTY_STRING);
 		MemberParameters[] members = extractMembers(tempString);
 		for (MemberParameters member : members ){
-			listOfMembers.add(new Member(member.getName(), type, member.getValue()));
+			listOfMembers.add(new Member(member.name, type, member.value));
 		}
 		return listOfMembers.toArray(new Member[listOfMembers.size()]);
 	}
@@ -83,7 +74,7 @@ public class MemberFactory {
 		wordMatcher.replaceFirst(EMPTY_STRING);
 		MemberParameters[] members = extractMembers(tempString);
 		for (MemberParameters member : members ){
-			listOfMembers.add(new Member(member.getName(), type, member.getValue(), modifier));
+			listOfMembers.add(new Member(member.name, type, member.value, modifier));
 		}
 		return listOfMembers.toArray(new Member[listOfMembers.size()]);
 	}
