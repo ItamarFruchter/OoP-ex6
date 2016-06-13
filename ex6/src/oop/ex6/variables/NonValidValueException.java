@@ -6,6 +6,8 @@ package oop.ex6.variables;
  * this. Not necessarily an illegal code exception!
  */
 public class NonValidValueException extends Exception {
+	
+	private static final long serialVersionUID = 1L;
 	/** The variable type to check. */
 	public Type type;
 	/** The name to check. */

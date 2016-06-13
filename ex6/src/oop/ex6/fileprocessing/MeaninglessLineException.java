@@ -1,10 +1,9 @@
 package oop.ex6.fileprocessing;
 
-public class MeaninglessLineException extends Exception {
+import oop.ex6.error.IllegalCodeException;
 
-	/**
-	 * 
-	 */
+public class MeaninglessLineException extends IllegalCodeException {
+
 	private static final long serialVersionUID = 1L;
 	
 	
