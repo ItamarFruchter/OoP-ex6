@@ -1,71 +1,19 @@
 package oop.ex6.fileprocessing;
 
-
-
-import java.util.EnumSet;
-import java.util.LinkedList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 /**
- * this class analyze what's the purpose of each line
+ * this class analyze what's the type of each line
  */
 public class LineAnalyzer {
-
-	
-	private enum LineType{
-		CLOSING_BLOCK("\\s*\\}\\s*"),
-		DECLERATION("\\s*\\w+(\\s+\\w+){1,2}(\\s*=\\s*[\\w\"\\.]+\\s*)?((\\s*,\\s*\\w+)\\s*"
-				+ "(=\\s*[\\w\"\\.]+\\s*)?)*?\\s*;\\s*"),
-		ASSIGNMENT("\\s*\\w+\\s*=\\s*[\\w\"\\.]+\\s*;\\s*"),
-		// such as if/while blocks
-		NON_METHOD_BLOCK("\\s*\\w+\\s*\\(\\s*([\\w\"\\.]|(\\|\\|)|(\\&\\&))+\\s*\\)\\s*\\{\\s*"),
-		METHOD_DECLERATION("\\s*\\w+\\s+\\w+\\s*\\((\\s*\\w+\\s*\\w+(\\s*,\\s*\\w+\\s*\\w+)*)?\\)\\s*\\{\\s*"),
-		METHOD_CALLING("\\s*\\w+\\s*\\((\\s*[\\w\"\\.]+(\\s*,\\s*[\\w\"\\.]+)*)?\\)\\s*;\\s*"),
-		COMMENT_LINE("\\s*//.*"),
-		RETURN_STATEMENT("\\s*return\\s*;\\s*");
-		
-		/*
-		 * the pattern that represents the line type
-		 */
-		private Pattern pattern;
-		
-		/*
-		 * constructs the different line type
-		 */
-		private LineType(String regEx){
-			this.pattern = Pattern.compile(regEx);
-		}
-		
-		/*
-		 * returns the pattern of the line type
-		 */
-		private Pattern getPattern(){
-			return pattern;
-		}
-		
-	}
-	
-	
-	String Dec = "\\s*" + WORD + "(" + SPACES + WORD + "){1,2}";
-	private static final String SPACES = ("\\s+");
-	private static final String WORD = ("\\w+");
-	private static final String VALUE = ("[\\w\"\\.]+");
-	private static final String DECLERATION = ("\\s*\\w+(\\s+\\w+){1,2}(\\s*=\\s*[\\w\"\\.]+\\s*)?((\\s*,\\s*\\w+)\\s*"
-			+ "(=\\s*[\\w\"\\.]+\\s*)?)*?\\s*;\\s*");
-	private static final String ASSIGNMENT = ("\\s*\\w+\\s*=\\s*[\\w\"\\.]+\\s*;\\s*");
-	private static final String CLOSING_BLOCK = ("\\s*}\\s*");
-	
-	
 	
 	private LineAnalyzer(){}
 	
-	public static LineType analyzeLine(String line){
-		for (LineType type : LineType.values()){
-			Matcher lineMatcher = type.getPattern().matcher(line);
+	public static LineType analyzeLine(String line) throws MeaninglessLineException{
+		for (LineType lineType : LineType.values()){
+			Matcher lineMatcher = lineType.getPattern().matcher(line);
 			if (lineMatcher.matches()){
-				return type;
+				return lineType;
 			}
 		}
 		throw new MeaninglessLineException();
